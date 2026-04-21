@@ -70,8 +70,9 @@ def _build_prompt(statement, question, lang_name):
         f"You are evaluating comprehension of a {lang_name} statement.\n\n"
         f"Statement: {statement}\n"
         f"Question: {question}\n\n"
-        f"Provide a concise, accurate answer to the question based on the statement. "
-        f"Return ONLY the answer inside square brackets, e.g. [Your answer here]."
+        f"Give a short, direct answer in no more than 5 words. "
+        f"Just the answer, inside square brackets.\n"
+        f"Answer:"
     )
 
 
@@ -152,7 +153,7 @@ def _call_model(client, statement, question, lang_name, model_id, provider, max_
 
 # Removed BATCH_SIZE, BATCH_PAUSE, STAGGER_DELAY.
 # Use enough workers to keep the pipeline full while rate limiter throttles.
-MAX_WORKERS = 8
+MAX_WORKERS = 4
 
 
 def run_qa(df, lang_code, lang_name, model_id, provider):
